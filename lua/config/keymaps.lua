@@ -27,3 +27,8 @@ vim.keymap.set(
   "<cmd>lua vim.lsp.buf.references()<CR>",
   { noremap = true, silent = true, desc = "LSP Find references" }
 )
+
+-- Git
+vim.keymap.set("n", "<leader>gs", function()
+  vim.cmd("Git")
+end, { noremap = true, silent = true, desc = "Git status" })
