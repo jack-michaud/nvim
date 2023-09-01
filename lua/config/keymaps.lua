@@ -32,3 +32,7 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>gs", function()
   vim.cmd("Git")
 end, { noremap = true, silent = true, desc = "Git status" })
+
+vim.keymap.set("n", "<leader>gp", function()
+  vim.cmd("Git push")
+end, { noremap = true, silent = true, desc = "Git push" })
