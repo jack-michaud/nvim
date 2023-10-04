@@ -36,3 +36,7 @@ end, { noremap = true, silent = true, desc = "Git status" })
 vim.keymap.set("n", "<leader>gp", function()
   vim.cmd("Git push")
 end, { noremap = true, silent = true, desc = "Git push" })
+
+vim.keymap.set("n", "<leader>gl", function()
+  vim.cmd("Gclog")
+end, { noremap = true, silent = true, desc = "Git commit log" })
