@@ -81,6 +81,7 @@ return {
     opts = function(_, opts)
       local formatters = require("conform.formatters")
       formatters.black.command = prefer_bin_from_venv("black")
+      formatters.isort.command = prefer_bin_from_venv("isort")
       formatters.stylua.args =
         vim.list_extend({ "--indent-type", "Spaces", "--indent-width", "2" }, formatters.stylua.args)
 
@@ -111,17 +112,24 @@ return {
     opts = function(_, opts)
       local linters = require("lint").linters
       linters.mypy.cmd = prefer_bin_from_venv("mypy")
+      linters.pylint.cmd = prefer_bin_from_venv("pylint")
       linters.sqlfluff.args = vim.list_extend({ "--dialect", "postgres" }, linters.sqlfluff.args)
 
       local linters_by_ft = {
-        -- this extends lazyvim's nvim-lint setup
-        -- https://www.lazyvim.org/extras/linting/nvim-lint
-        protobuf = { "buf", "protolint" },
+        --   -- this extends lazyvim's nvim-lint setup
+        --   -- https://www.lazyvim.org/extras/linting/nvim-lint
+        --   protobuf = { "buf", "protolint" },
         python = { "pyright", "mypy" },
-        sh = { "shellcheck" },
-        sql = { "sqlfluff" },
-        yaml = { "yamllint" },
+        --   sh = { "shellcheck" },
+        --   sql = { "sqlfluff" },
+        --   yaml = { "yamllint" },
       }
+
+      -- Project specific overrides!
+      -- add pylint if the project is a MindfulData project
+      if vim.fn.getcwd():find("github.com/mindfuldataai") ~= nil then
+        linters_by_ft.python = { "pylint", "mypy" }
+      end
 
       -- extend opts.linters_by_ft
       for ft, linters_ in pairs(linters_by_ft) do
