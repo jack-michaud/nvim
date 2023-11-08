@@ -4,11 +4,7 @@ local function prefer_bin_from_venv(executable_name)
     local paths = vim.fn.glob(vim.env.VIRTUAL_ENV .. "/**/bin/" .. executable_name, true, true)
     local executable_path = table.concat(paths, ", ")
     if executable_path ~= "" then
-      -- vim.api.nvim_echo(
-      -- 	{ { "Using path for " .. executable_name .. ": " .. executable_path, "None" } },
-      -- 	false,
-      -- 	{}
-      -- )
+      --vim.api.nvim_echo({ { "Using path for " .. executable_name .. ": " .. executable_path, "None" } }, false, {})
       return executable_path
     end
   end
@@ -49,6 +45,13 @@ return {
   },
   {
     "tpope/vim-fugitive",
+    keys = {
+      {
+        "<leader>gb",
+        "<cmd>Git blame<cr>",
+        desc = "Git Blame",
+      },
+    },
   },
 
   {
@@ -119,7 +122,7 @@ return {
         --   -- this extends lazyvim's nvim-lint setup
         --   -- https://www.lazyvim.org/extras/linting/nvim-lint
         --   protobuf = { "buf", "protolint" },
-        python = { "pyright", "mypy" },
+        python = { "mypy" },
         --   sh = { "shellcheck" },
         --   sql = { "sqlfluff" },
         --   yaml = { "yamllint" },
