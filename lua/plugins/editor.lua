@@ -40,7 +40,6 @@ return {
       },
       -- Unbinding
       { "<leader>,", false },
-      { "<leader>gs", false },
     },
   },
   {
