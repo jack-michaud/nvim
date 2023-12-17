@@ -20,6 +20,7 @@ return {
   -- change some telescope options and a keymap to browse plugin files
   {
     "nvim-telescope/telescope.nvim",
+    dependencies = { "fcying/telescope-ctags-outline.nvim" },
     keys = {
       -- add a keymap to browse plugin files
       -- stylua: ignore
@@ -40,7 +41,29 @@ return {
       },
       -- Unbinding
       { "<leader>,", false },
+      { "<leader>t", "<cmd>Telescope ctags_outline<cr>", desc = "Ctags Outline" },
     },
+    opts = function()
+      -- require ctags_outline extension
+      require("telescope").load_extension("ctags_outline")
+
+      return {
+        extensions = {
+          ctags_outline = {
+            --ctags option
+            ctags = { "ctags" },
+            --ctags filetype option
+            ft_opt = {
+              -- vim = "--vim-kinds=fk",
+              -- javascript = "--javascript-kinds=f",
+              -- lua = "--lua-kinds=fk",
+              -- python = "--python-kinds=fm --language-force=Python",
+              -- typescript = "--typescript-kinds=f",
+            },
+          },
+        },
+      }
+    end,
   },
   {
     "tpope/vim-fugitive",
