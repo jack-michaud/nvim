@@ -119,6 +119,7 @@ return {
         --protobuf = { "buf" },
         python = { "isort", "black" },
         rust = { "rustfmt" },
+        typescript = { "prettier" },
       }
 
       -- extend opts.formatters_by_ft
