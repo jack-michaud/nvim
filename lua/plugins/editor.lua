@@ -180,9 +180,8 @@ return {
       "akinsho/bufferline.nvim",
       enable = false,
     },
-    --
     -- Pairs brackets, "autopairs"
-    { "echasnovski/mini.nvim", enable = false },
+    { "echasnovski/mini.pairs", enable = false },
     {
       "LazyVim/LazyVim",
       opts = {
