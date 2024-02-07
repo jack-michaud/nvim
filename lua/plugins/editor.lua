@@ -189,4 +189,21 @@ return {
       },
     },
   },
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      local dap = require("dap")
+      dap.configurations.python = {
+        {
+          type = "python",
+          request = "launch",
+          name = "Launch file",
+          program = "${file}",
+          pythonPath = function()
+            return prefer_bin_from_venv("python")
+          end,
+        },
+      }
+    end,
+  },
 }
