@@ -29,7 +29,6 @@ local function prefer_bin_from_venv(executable_name)
   return mason_path
 end
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 return {
   -- change some telescope options and a keymap to browse plugin files
   {
