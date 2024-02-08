@@ -9,6 +9,20 @@ local function prefer_bin_from_venv(executable_name)
     end
   end
 
+  -- find poetry.lock file in current directory or parent directories
+  local poetry_lock = vim.fn.findfile("poetry.lock", ".;")
+  if poetry_lock ~= "" then
+    -- use `poetry env info -p -C <path of folder containing poetry.lock>` to get the virtualenv path
+    local poetry_env_path = vim.fn.systemlist("poetry env info -p -C " .. vim.fn.fnamemodify(poetry_lock, ":h"))
+
+    if #poetry_env_path > 0 then
+      local venv_path = poetry_env_path[1] .. "/bin/" .. executable_name
+      if vim.fn.filereadable(venv_path) == 1 then
+        return venv_path
+      end
+    end
+  end
+
   local mason_registry = require("mason-registry")
   local mason_path = mason_registry.get_package(executable_name):get_install_path() .. "/venv/bin/" .. executable_name
   -- vim.api.nvim_echo({ { "Using path for " .. executable_name .. ": " .. mason_path, "None" } }, false, {})
@@ -133,4 +147,20 @@ return {
   },
   -- Pairs brackets, "autopairs"
   { "echasnovski/mini.pairs", enabled = false },
+  {
+    -- lsp config
+    "nvim-lspconfig",
+    opts = {
+      setup = {
+        pyright = function(_, opts)
+          -- setup
+          opts.on_init = function(client, _)
+            client.config.settings.python.pythonPath = prefer_bin_from_venv("python")
+          end
+
+          require("lspconfig").pyright.setup(opts)
+        end,
+      },
+    },
+  },
 }
