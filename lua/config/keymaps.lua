@@ -27,3 +27,7 @@ vim.keymap.set(
   "<cmd>lua vim.lsp.buf.references()<CR>",
   { noremap = true, silent = true, desc = "LSP Find references" }
 )
+
+-- Move selected text
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
