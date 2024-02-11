@@ -157,6 +157,7 @@ return {
           opts.settings = {
             python = {
               pythonPath = prefer_bin_from_venv("python"),
+              analysis = { diagnosticMode = "off", typeCheckingMode = "off" },
             },
           }
           require("lspconfig").pyright.setup(opts)
