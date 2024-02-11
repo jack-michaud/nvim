@@ -13,11 +13,13 @@ local function prefer_bin_from_venv(executable_name)
   local poetry_lock = vim.fn.findfile("poetry.lock", ".;")
   if poetry_lock ~= "" then
     -- use `poetry env info -p -C <path of folder containing poetry.lock>` to get the virtualenv path
-    local poetry_env_path = vim.fn.systemlist("poetry env info -p -C " .. vim.fn.fnamemodify(poetry_lock, ":h"))
+    local poetry_env_path =
+      vim.fn.systemlist("poetry env list --full-path -C " .. vim.fn.fnamemodify(poetry_lock, ":h"))
 
     if #poetry_env_path > 0 then
       local venv_path = poetry_env_path[1] .. "/bin/" .. executable_name
       if vim.fn.filereadable(venv_path) == 1 then
+        print("Using path for " .. executable_name .. ": " .. venv_path)
         return venv_path
       end
     end
@@ -152,14 +154,59 @@ return {
     opts = {
       setup = {
         pyright = function(_, opts)
-          -- setup
-          opts.on_init = function(client, _)
-            client.config.settings.python.pythonPath = prefer_bin_from_venv("python")
-          end
-
+          opts.settings = {
+            python = {
+              pythonPath = prefer_bin_from_venv("python"),
+            },
+          }
           require("lspconfig").pyright.setup(opts)
+          return true
         end,
+        ruff_lsp = function(_, opts)
+          require("lspconfig").ruff_lsp.setup(opts)
+          return true
+        end,
+        ["*"] = function(server, opts) end,
       },
+    },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    enabled = true,
+    opts = {
+      events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+      linters_by_ft = {
+        python = { "mypy" },
+      },
+    },
+    init = function()
+      local mypy_config = require("lint").linters.mypy
+
+      mypy_config.append_fname = false
+      mypy_config.cmd = function()
+        if mypy_config._cached_cmd then
+          return mypy_config._cached_cmd
+        end
+        local cmd = prefer_bin_from_venv("dmypy")
+        mypy_config._cached_cmd = cmd
+        return cmd
+      end
+      table.insert(mypy_config.args, 1, "run")
+      table.insert(mypy_config.args, 2, "--")
+      table.insert(mypy_config.args, ".")
+    end,
+  },
+  {
+    "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("chatgpt").setup()
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "folke/trouble.nvim",
+      "nvim-telescope/telescope.nvim",
     },
   },
 }
