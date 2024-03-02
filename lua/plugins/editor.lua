@@ -48,6 +48,11 @@ return {
         desc = "Buffers",
       },
       {
+        "<leader>e",
+        "<cmd>Telescope file_browser<cr>",
+        desc = "File browser",
+      },
+      {
         "<leader>F",
         "<cmd>Telescope find_files<cr>",
         desc = "Find Files",
@@ -64,6 +69,9 @@ return {
     opts = function()
       -- require ctags_outline extension
       require("telescope").load_extension("ctags_outline")
+      require("telescope").load_extension("file_browser")
+
+      local fb_actions = require("telescope").extensions.file_browser.actions
 
       return {
         extensions = {
@@ -79,9 +87,23 @@ return {
               -- typescript = "--typescript-kinds=f",
             },
           },
+          file_browser = {
+            theme = "dropdown",
+            mappings = {
+              ["i"] = {
+                ["<C-t>"] = fb_actions.change_cwd,
+                ["<C-r>"] = fb_actions.create,
+              },
+              ["n"] = {},
+            },
+          },
         },
       }
     end,
+  },
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
   },
   {
     "tpope/vim-fugitive",
