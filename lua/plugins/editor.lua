@@ -17,10 +17,23 @@ local function prefer_bin_from_venv(executable_name)
       vim.fn.systemlist("poetry env list --full-path -C " .. vim.fn.fnamemodify(poetry_lock, ":h"))
 
     if #poetry_env_path > 0 then
-      local venv_path = poetry_env_path[1] .. "/bin/" .. executable_name
-      if vim.fn.filereadable(venv_path) == 1 then
-        print("Using path for " .. executable_name .. ": " .. venv_path)
-        return venv_path
+      local selected_poetry_env_path = poetry_env_path[1]
+      if #poetry_env_path > 1 then
+        for _, env_path in ipairs(poetry_env_path) do
+          if string.find(env_path, "Activated") then
+            print("Multiple virtualenvs found, using Activated " .. env_path)
+            -- Must strip the word "(Activated)" from the string
+
+            selected_poetry_env_path = string.gsub(env_path, " %(Activated%)", "")
+            selected_poetry_env_path = vim.fn.trim(selected_poetry_env_path)
+            break
+          end
+        end
+      end
+      local venv_path_to_python = selected_poetry_env_path .. "/bin/" .. executable_name
+      if vim.fn.filereadable(venv_path_to_python) == 1 then
+        print("Using path for " .. executable_name .. ": " .. venv_path_to_python)
+        return venv_path_to_python
       end
     end
   end
