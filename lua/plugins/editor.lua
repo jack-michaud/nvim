@@ -225,6 +225,13 @@ return {
   {
     "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
+    keys = {
+      {
+        "<leader>ch",
+        "<cmd>ChatGPT<cr>",
+        desc = "Start ChatGPT",
+      },
+    },
     config = function()
       require("chatgpt").setup()
     end,
@@ -234,5 +241,21 @@ return {
       "folke/trouble.nvim",
       "nvim-telescope/telescope.nvim",
     },
+  },
+
+  {
+    "lualine.nvim",
+    opts = function()
+      return {
+        sections = {
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {
+            "filename",
+          },
+        },
+      }
+    end,
   },
 }
