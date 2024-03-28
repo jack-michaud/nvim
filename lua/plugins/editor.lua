@@ -17,9 +17,17 @@ local function prefer_bin_from_venv(executable_name)
       vim.fn.systemlist("poetry env list --full-path -C " .. vim.fn.fnamemodify(poetry_lock, ":h"))
 
     if #poetry_env_path > 0 then
-      local selected_poetry_env_path = poetry_env_path[1]
+      local candidate_paths = {}
+      for _, env_path in ipairs(poetry_env_path) do
+        if env_path ~= "" then
+          if string.sub(env_path, 0, 1) == "/" then
+            table.insert(candidate_paths, 0, env_path)
+          end
+        end
+      end
+      local selected_poetry_env_path = candidate_paths[0]
       if #poetry_env_path > 1 then
-        for _, env_path in ipairs(poetry_env_path) do
+        for _, env_path in ipairs(candidate_paths) do
           if string.find(env_path, "Activated") then
             print("Multiple virtualenvs found, using Activated " .. env_path)
             -- Must strip the word "(Activated)" from the string
@@ -310,7 +318,7 @@ return {
         logo = darkforest_logo
       end
       -- If hostname is `Jacks-MacBook-Pro.local`, then set logo to Fay logo.
-      if string.match(hostname, "Jacks-MacBook-Pro.local") then
+      if string.match(hostname, "Jacks%-MacBook%-Pro.local") then
         logo = fay_logo
       end
 
