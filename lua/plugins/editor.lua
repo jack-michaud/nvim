@@ -276,13 +276,18 @@ return {
       },
     },
     config = function()
-      require("chatgpt").setup()
+      require("chatgpt").setup({
+        actions_paths = {
+          vim.fn.stdpath("config") .. "/lua/plugins/ai_actions.json",
+        },
+      })
     end,
     dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
       "folke/trouble.nvim",
       "nvim-telescope/telescope.nvim",
+      "jack-michaud/ai-actions",
     },
   },
 
