@@ -345,8 +345,8 @@ return {
       if string.match(hostname, "DARKFOREST") then
         logo = darkforest_logo
       end
-      -- If hostname is `Jacks-MacBook-Pro.local`, then set logo to Fay logo.
-      if string.match(hostname, "Jacks%-MacBook%-Pro.local") then
+      -- If hostname is `Jacks-MBP.lan`, then set logo to Fay logo.
+      if string.match(hostname, "Jacks%-MBP%.lan") then
         logo = fay_logo
       end
 
