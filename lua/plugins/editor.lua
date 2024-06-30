@@ -265,6 +265,7 @@ return {
       table.insert(mypy_config.args, ".")
     end,
   },
+  { "jack-michaud/ai-actions" },
   {
     "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
