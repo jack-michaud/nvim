@@ -164,22 +164,11 @@ return {
     enabled = true,
   },
 
-  --{
-  --  "zbirenbaum/copilot.lua",
-  --  opts = {
-  --    suggestion = { enabled = true },
-  --  },
-  --},
   {
-    "hrsh7th/nvim-cmp",
-    dependencies = { "supermaven-inc/supermaven-nvim" },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      require("supermaven-nvim").setup({
-        disable_inline_completion = false,
-      })
-      table.insert(opts.sources, { name = "supermaven" })
-    end,
+    "zbirenbaum/copilot.lua",
+    opts = {
+      suggestion = { enabled = true },
+    },
   },
   {
     "L3MON4D3/LuaSnip",
