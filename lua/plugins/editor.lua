@@ -249,9 +249,19 @@ return {
         mypy_config._cached_cmd = cmd
         return cmd
       end
-      table.insert(mypy_config.args, 1, "run")
-      table.insert(mypy_config.args, 2, "--")
-      table.insert(mypy_config.args, ".")
+      mypy_config.args = {
+          'run',
+          '--',
+          -- https://github.com/mfussenegger/nvim-lint/blob/master/lua/lint/linters/mypy.lua
+          '--show-column-numbers',
+          '--show-error-end',
+          '--hide-error-codes',
+          '--hide-error-context',
+          '--no-color-output',
+          '--no-error-summary',
+          '--no-pretty',
+          '.',
+      }
     end,
   },
   { "jack-michaud/ai-actions" },
