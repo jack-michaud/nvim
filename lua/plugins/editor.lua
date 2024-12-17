@@ -241,14 +241,14 @@ return {
       local mypy_config = require("lint").linters.mypy
 
       mypy_config.append_fname = false
-      mypy_config.cmd = function()
+      mypy_config.cmd = (function()
         if mypy_config._cached_cmd then
           return mypy_config._cached_cmd
         end
         local cmd = prefer_bin_from_venv("dmypy")
         mypy_config._cached_cmd = cmd
         return cmd
-      end
+      end)()
       mypy_config.args = {
           'run',
           '--',
