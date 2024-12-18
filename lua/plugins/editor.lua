@@ -159,12 +159,6 @@ return {
   },
 
   {
-    "mfussenegger/nvim-lint",
-    -- https://github.com/mfussenegger/nvim-lint
-    enabled = true,
-  },
-
-  {
     "zbirenbaum/copilot.lua",
     opts = {
       suggestion = { enabled = true },
@@ -241,21 +235,13 @@ return {
       local mypy_config = require("lint").linters.mypy
 
       mypy_config.append_fname = false
-      mypy_config.cmd = (function()
-        if mypy_config._cached_cmd then
-          return mypy_config._cached_cmd
-        end
-        local cmd = prefer_bin_from_venv("dmypy")
-        mypy_config._cached_cmd = cmd
-        return cmd
-      end)()
+      mypy_config.cmd = prefer_bin_from_venv("dmypy")
       mypy_config.args = {
           'run',
           '--',
           -- https://github.com/mfussenegger/nvim-lint/blob/master/lua/lint/linters/mypy.lua
           '--show-column-numbers',
           '--show-error-end',
-          '--hide-error-codes',
           '--hide-error-context',
           '--no-color-output',
           '--no-error-summary',
