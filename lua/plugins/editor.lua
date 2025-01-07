@@ -246,6 +246,7 @@ return {
           '--no-color-output',
           '--no-error-summary',
           '--no-pretty',
+          '--use-fine-grained-cache',
           '.',
       }
     end,
