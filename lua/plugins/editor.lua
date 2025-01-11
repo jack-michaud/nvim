@@ -175,12 +175,6 @@ return {
     enabled = false,
   },
   {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin",
-    },
-  },
-  {
     "mfussenegger/nvim-dap",
     config = function()
       local dap = require("dap")
@@ -298,50 +292,11 @@ return {
     config = function()
       vim.opt.termguicolors = true
       vim.cmd.colorscheme("melange")
-    end,
-  },
-  {
-    "dashboard-nvim",
-    opts = function(_, opts)
-      local darkforest_logo = [[
- .___       .    .___  .     .____   ___   .___  .____    _____  _______
- /   `     /|    /   \ /   / /     .'   `. /   \ /       (      '   /   
- |    |   /  \   |__-' |_-'  |__.  |     | |__-' |__.     `--.      |   
- |    |  /---'\  |  \  |  \  |     |     | |  \  |           |      |   
- /---/ ,'      \ /   \ /   \ /      `.__.' /   \ /----/ \___.'      /   
 
-      ]]
+      -- Enable transparency
+      vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
 
-      local fay_logo = [[
-                   ((.                                                          
-            ((     ((,    *((                                                   
-             (            */                                                    
-     /(((       (((((((((      *(((         %%%%%%%%%(                          
-         ,   ((((((((((((((/   /            %#          %%%%%%%   %%#    /%%    
-            (((((((((((((((((               %%%%%%%%%         %%   %%#  ,%%     
-   (((((   /(((((((((((((((((   (((((/      %#         #%%    #%    %%( %%      
-            (((((((((((((((((               %#         #%%* (%%%     %%%#       
-                                                                   ( (%#        
-      ]]
-
-      -- Set logo based on hostname.
-      local logo = ""
-      local hostname = vim.fn.system("hostname")
-      -- If hostname is `DARKFOREST`, set logo to Darkforest logo.
-      if string.match(hostname, "DARKFOREST") then
-        logo = darkforest_logo
-      end
-      -- If hostname is `Jacks-MBP.lan`, then set logo to Fay logo.
-      if string.match(hostname, "Jacks%-MBP%.lan") then
-        logo = fay_logo
-      end
-
-      if logo == "" then
-        return opts
-      end
-
-      opts.config.header = vim.split(string.rep("\n", 8) .. logo .. "\n\n", "\n")
-      return opts
     end,
   },
 }
