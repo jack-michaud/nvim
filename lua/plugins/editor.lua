@@ -136,7 +136,7 @@ return {
       { "<leader>G", "<cmd>FzfLua live_grep<cr>", desc = "Grep" },
       -- Unbinding
       { "<leader>,", false },
-    }
+    },
   },
   {
     "tpope/vim-fugitive",
@@ -218,16 +218,15 @@ return {
                 pythonPath = pythonPath,
                 analysis = { diagnosticMode = "off", typeCheckingMode = "off" },
               },
-            }
+            },
           },
           ruff_lsp = {
-            enabled = true
-          }
+            enabled = true,
+          },
         },
       }
       return ret
-    end
-    },
+    end,
   },
   {
     "mfussenegger/nvim-lint",
@@ -244,20 +243,20 @@ return {
       mypy_config.append_fname = false
       mypy_config.cmd = "poetry"
       mypy_config.args = {
-          'run',
-          '--',
-          'dmypy',
-          'run',
-          '--',
-          -- https://github.com/mfussenegger/nvim-lint/blob/master/lua/lint/linters/mypy.lua
-          '--show-column-numbers',
-          '--show-error-end',
-          '--hide-error-context',
-          '--no-color-output',
-          '--no-error-summary',
-          '--no-pretty',
-          '--use-fine-grained-cache',
-          '.',
+        "run",
+        "--",
+        "dmypy",
+        "run",
+        "--",
+        -- https://github.com/mfussenegger/nvim-lint/blob/master/lua/lint/linters/mypy.lua
+        "--show-column-numbers",
+        "--show-error-end",
+        "--hide-error-context",
+        "--no-color-output",
+        "--no-error-summary",
+        "--no-pretty",
+        "--use-fine-grained-cache",
+        ".",
       }
     end,
   },
@@ -312,7 +311,6 @@ return {
       -- Enable transparency
       vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
-
     end,
   },
 }
