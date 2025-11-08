@@ -211,15 +211,15 @@ return {
       local pythonPath = prefer_bin_from_venv("python")
       local ret = {
         setup = {
-          pyright = {
-            enabled = true,
-            settings = {
-              python = {
-                pythonPath = pythonPath,
-                analysis = { diagnosticMode = "off", typeCheckingMode = "off" },
-              },
-            },
-          },
+          -- pyright = {
+          --   enabled = true,
+          --   settings = {
+          --     python = {
+          --       pythonPath = pythonPath,
+          --       analysis = { diagnosticMode = "off", typeCheckingMode = "off" },
+          --     },
+          --   },
+          -- },
           ruff_lsp = {
             enabled = true,
           },
