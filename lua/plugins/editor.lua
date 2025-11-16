@@ -132,4 +132,22 @@ return {
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
     end,
   },
+  {
+    "folke/snacks.nvim",
+    ---@type snacks.Config
+    opts = {
+      ---@class snacks.gitbrowse.Config
+      ---@field url_patterns? table<string, table<string, string|fun(fields:snacks.gitbrowse.Fields):string>>
+      gitbrowse = {
+        what = "permalink"
+      }
+    },
+    keys = {
+      {
+        "<leader>gB",
+        function() require("plugins.jjgitbrowse").open(require("snacks").config.gitbrowse) end,
+        desc = "Open on git remote"
+      }
+    }
+  }
 }
