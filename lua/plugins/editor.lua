@@ -45,6 +45,31 @@ return {
       return {}
     end,
   },
+
+  {
+    "saghen/blink.cmp",
+    dependencies = { "L3MON4D3/LuaSnip" },
+
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      sources = {
+        providers = {
+          buffer = {
+            opts = {
+              -- or (recommended) filter to only "normal" buffers
+              get_bufnrs = function()
+                return vim.tbl_filter(function(bufnr)
+                  return vim.bo[bufnr].buftype == ''
+                end, vim.api.nvim_list_bufs())
+              end
+            }
+          }
+        }
+      }
+    }
+  },
+
   {
     "akinsho/bufferline.nvim",
     enabled = false,
