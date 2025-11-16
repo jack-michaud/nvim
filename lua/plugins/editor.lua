@@ -83,9 +83,13 @@ return {
     opts = function()
       return {
         sections = {
-          lualine_c = {},
-          lualine_x = {},
-          lualine_y = {},
+          lualine_c = {
+          },
+          lualine_x = {
+            "lsp_status",
+          },
+          lualine_y = {
+          },
           lualine_z = {
             "filename",
           },
