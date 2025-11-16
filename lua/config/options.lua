@@ -4,3 +4,7 @@
 
 vim.opt.foldmethod = "marker"
 vim.opt.foldmarker = "region,endregion"
+
+vim.cmd([[
+  inoremap jk <Esc>
+]])
