@@ -137,7 +137,6 @@ return {
     ---@type snacks.Config
     opts = {
       ---@class snacks.gitbrowse.Config
-      ---@field url_patterns? table<string, table<string, string|fun(fields:snacks.gitbrowse.Fields):string>>
       gitbrowse = {
         what = "permalink"
       }
@@ -145,7 +144,7 @@ return {
     keys = {
       {
         "<leader>gB",
-        function() require("plugins.jjgitbrowse").open(require("snacks").config.gitbrowse) end,
+        function() require("common.jjgitbrowse").open(require("snacks").config.gitbrowse) end,
         desc = "Open on git remote"
       }
     }
