@@ -1,4 +1,4 @@
-local function prefer_bin_from_venv(executable_name)
+function prefer_bin_from_venv(executable_name)
   return "python"
 
   ---- Return the path to the executable if $VIRTUAL_ENV is set and the binary exists somewhere beneath the $VIRTUAL_ENV path, otherwise get it from Mason
