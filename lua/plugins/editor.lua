@@ -76,31 +76,31 @@ return {
   -- Pairs brackets, "autopairs"
   { "nvim-mini/mini.pairs", enabled = false },
   { "jack-michaud/ai-actions" },
-  {
-    "jackMort/ChatGPT.nvim",
-    event = "VeryLazy",
-    keys = {
-      {
-        "<leader>ch",
-        "<cmd>ChatGPT<cr>",
-        desc = "Start ChatGPT",
-      },
-    },
-    config = function()
-      require("chatgpt").setup({
-        actions_paths = {
-          vim.fn.stdpath("config") .. "/lua/plugins/ai_actions.json",
-        },
-      })
-    end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "folke/trouble.nvim",
-      "nvim-telescope/telescope.nvim",
-      "jack-michaud/ai-actions",
-    },
-  },
+  -- {
+  --   "jackMort/ChatGPT.nvim",
+  --   event = "VeryLazy",
+  --   keys = {
+  --     {
+  --       "<leader>ch",
+  --       "<cmd>ChatGPT<cr>",
+  --       desc = "Start ChatGPT",
+  --     },
+  --   },
+  --   config = function()
+  --     require("chatgpt").setup({
+  --       actions_paths = {
+  --         vim.fn.stdpath("config") .. "/lua/plugins/ai_actions.json",
+  --       },
+  --     })
+  --   end,
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "folke/trouble.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --     "jack-michaud/ai-actions",
+  --   },
+  -- },
 
   {
     "lualine.nvim",
