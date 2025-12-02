@@ -48,10 +48,14 @@ return {
   {
     "saghen/blink.cmp",
     dependencies = { "L3MON4D3/LuaSnip" },
+    event = { "InsertEnter", "CmdlineEnter" },
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      fuzzy = {
+        implementation = "lua",
+      },
       sources = {
         providers = {
           buffer = {
