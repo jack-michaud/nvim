@@ -7,3 +7,5 @@ foo.*
 *.log
 data
 ai_actions.json
+
+logs
